@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
+import "react-markdown-editor-lite/lib/index.css";
 
 const MarkdownComponents: object = {
   p: (paragraph: { children?: boolean; node?: any }) => {
@@ -23,7 +24,7 @@ const MarkdownComponents: object = {
             src={image.properties.src}
             width={width}
             height={height}
-            className="postImg"
+            className="postImg w-full"
             alt={alt}
             priority={isPriority}
           />

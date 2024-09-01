@@ -97,8 +97,8 @@ export default function BlogFormPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white shadow-md rounded-lg bg-foreground/10">
-      <h1 className="text-2xl font-semibold mb-6">Create New Blog Post</h1>
+    <div className="container mx-auto p-8 bg-white shadow-md rounded-lg bg-foreground/10">
+      <h1 className="text-2xl font-semibold mb-6">Create New Blog</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSave)}>
           <FormField
@@ -193,7 +193,7 @@ export default function BlogFormPage() {
             disabled={load}
             className="w-full inline-flex justify-center hover:bg-accent-hover disabled:bg-foreground/50"
           >
-            Create Post
+            Create Blog
           </Button>
         </form>
       </Form>

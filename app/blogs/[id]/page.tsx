@@ -38,20 +38,28 @@ export default async function BlogPostPage({
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-2">{blog.category}</h1>
-      <p className="text-lg text-gray-700 mb-4">{blog.excerpt}</p>
+    <div className="container mx-auto p-6 mb-5 bg-form">
+      <div className="w-full flex justify-start">
+        <span className="text-base md:text-lg rounded-tr-full rounded-br-full bg-accent px-4 py-2 text-primary">
+          {blog.category}
+        </span>
+      </div>
+      <h2 className="h2 my-4">{blog.excerpt}</h2>
       {blog.featureImage && blog.featureImage.startsWith("http") && (
         <Image
           src={blog.featureImage}
           alt={blog.category}
-          className="mb-4 max-w-full h-auto"
+          className="mb-4 w-full h-auto"
           quality={100}
-          width={400}
-          height={400}
+          width={768}
+          height={768}
         />
       )}
-      <Markdown>{blog.mainContent}</Markdown>
+      <div className="border-t-accent/50 border-t-2 pt-8 mt-8 html-wrap">
+        <div className="custom-html-style">
+          <Markdown>{blog.mainContent}</Markdown>
+        </div>
+      </div>
     </div>
   );
 }
