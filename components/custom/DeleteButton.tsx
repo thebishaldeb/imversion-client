@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { gql, client } from "@/lib/client";
+import { revalidate } from "@/lib/actions";
 
 const mutation = gql`
   mutation DeleteBlog($deleteBlogPostId: Int!) {
@@ -27,10 +28,8 @@ const DeleteButton = ({ id }: { id: number }) => {
       size="sm"
       className="bg-[#ff0000] rounded-none text-primary"
       onClick={async () => {
-        const res = await deleteBlog(id);
-        if (res) {
-          router.replace("/blogs");
-        }
+        await deleteBlog(id);
+        revalidate(id, true);
       }}
     >
       Delete

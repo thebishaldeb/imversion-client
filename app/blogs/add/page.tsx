@@ -34,6 +34,7 @@ import { CATEGORIES } from "@/constants";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { revalidate } from "@/lib/actions";
 
 const MdEditor = dynamic(() => import("react-markdown-editor-lite"), {
   ssr: false,
@@ -91,7 +92,7 @@ export default function BlogFormPage() {
     setLoad(true);
     const blogPost: CreateBlogPostMutationVariables = data;
     const response = await saveBlogPost(blogPost);
-
+    revalidate(response.id, true);
     router.push(`/blogs/${response.id}`);
     setLoad(false);
   };
