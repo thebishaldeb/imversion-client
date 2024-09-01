@@ -1,12 +1,6 @@
 import CategoryDropdown from "@/components/CategoryDropdown";
 import BlogsList from "@/components/CategoriesBlogsList";
-
-const CATEGORIES: { name: string }[] = [
-  { name: "Science" },
-  { name: "History" },
-  { name: "Sports" },
-  { name: "Anime" },
-];
+import { CATEGORIES } from "@/constants";
 
 // Page component
 export default function BlogsSearchPage() {
