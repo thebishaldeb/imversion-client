@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Nav from "./custom/Navbar/Nav";
-import MobileNav from "./custom/Navbar/MobileNav";
+import Nav from "./Navbar/Nav";
+import MobileNav from "./Navbar/MobileNav";
 
 function Header() {
   return (

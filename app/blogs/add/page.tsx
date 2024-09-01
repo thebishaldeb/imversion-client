@@ -9,7 +9,7 @@ import {
   CreateBlogPostMutationVariables,
 } from "@/lib/graphql/generated/graphql";
 import "react-markdown-editor-lite/lib/index.css";
-import Markdown from "@/components/Markdown";
+import Markdown from "@/components/custom/Markdown";
 import { Input } from "@/components/ui/input";
 import {
   Select,

@@ -1,5 +1,5 @@
-import CategoryDropdown from "@/components/CategoryDropdown";
-import BlogsList from "@/components/CategoriesBlogsList";
+import CategoryDropdown from "@/components/custom/CategoryDropdown";
+import BlogsList from "@/components/custom/CategoriesBlogsList";
 import { CATEGORIES } from "@/constants";
 
 // Page component

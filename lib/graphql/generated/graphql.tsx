@@ -118,3 +118,10 @@ export type GetBlogPostsByCategoryQueryVariables = Exact<{
 
 
 export type GetBlogPostsByCategoryQuery = { __typename?: 'Query', blogPostsByCategory: { __typename?: 'BlogsList', totalCount: number, edges: Array<{ __typename?: 'BlogPost', id: number, category: string, featureImage: string, excerpt: string }>, pageInfo: { __typename?: 'PageInfo', endCursor: number, hasNextPage: boolean } } };
+
+export type DeleteBlogMutationVariables = Exact<{
+  deleteBlogPostId: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteBlogMutation = { __typename?: 'Mutation', deleteBlogPost?: boolean | null };

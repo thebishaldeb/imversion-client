@@ -1,5 +1,5 @@
 import { gql, client } from "@/lib/client";
-import BlogsList from "@/components/BlogsList";
+import BlogsList from "@/components/custom/BlogsList";
 import {
   BlogsList as Blogs,
   GetBlogPostsQueryVariables,

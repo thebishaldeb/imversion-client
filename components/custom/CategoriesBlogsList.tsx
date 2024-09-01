@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { gql, client } from "@/lib/client";
 import { BlogsList, BlogPost } from "@/lib/graphql/generated/graphql";
 import { useSearchParams } from "next/navigation";
-import BlogCard from "./custom/BlogCard";
-import { PaginationComponent } from "./custom/Pagination";
+import BlogCard from "./BlogCard";
+import { PaginationComponent } from "./Pagination";
 
 // GraphQL query to get blog posts by category
 const query = gql`

@@ -1,7 +1,7 @@
 import { BlogsList as Blogs } from "@/lib/graphql/generated/graphql";
 import React from "react";
-import BlogCard from "./custom/BlogCard";
-import { PaginationComponent } from "./custom/Pagination";
+import BlogCard from "./BlogCard";
+import { PaginationComponent } from "./Pagination";
 
 interface BlogsListProps {
   blogs: Blogs;

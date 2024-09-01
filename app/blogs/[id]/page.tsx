@@ -1,7 +1,8 @@
-import Markdown from "@/components/Markdown";
+import Markdown from "@/components/custom/Markdown";
 import { BlogPost } from "@/lib/graphql/generated/graphql";
-import { request, gql } from "graphql-request";
+import { gql, client } from "@/lib/client";
 import Image from "next/image";
+import DeleteButton from "@/components/custom/DeleteButton";
 
 const query = gql`
   query GetBlogPost($id: Int!) {
@@ -16,11 +17,9 @@ const query = gql`
 `;
 
 const fetchBlogPostById = async (id: number): Promise<BlogPost> => {
-  const { blogPost }: { blogPost: BlogPost } = await request(
-    process.env.NEXT_PUBLIC_SCHEMA as string,
-    query,
-    { id }
-  );
+  const { blogPost }: { blogPost: BlogPost } = await client.request(query, {
+    id,
+  });
 
   return blogPost;
 };
@@ -39,10 +38,11 @@ export default async function BlogPostPage({
 
   return (
     <div className="container mx-auto p-6 mb-5 bg-form">
-      <div className="w-full flex justify-start">
+      <div className="w-full flex justify-between">
         <span className="text-base md:text-lg rounded-tr-full rounded-br-full bg-accent px-4 py-2 text-primary">
           {blog.category}
         </span>
+        <DeleteButton id={id} />
       </div>
       <h2 className="h2 my-4">{blog.excerpt}</h2>
       {blog.featureImage && blog.featureImage.startsWith("http") && (
