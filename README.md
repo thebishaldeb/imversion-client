@@ -60,8 +60,7 @@ The application will be available at `http://localhost:3000`.
 
 - **Blog Module:**
 
-  - Create and edit blog posts with rich text and markdown support.
-  - Display featured images for blog posts.
+  - Create blog posts with markdown support.
   - Categorize blog posts and filter them based on categories.
   - Pagination support for viewing multiple blog posts.
   - SSR support for rendering blogs efficiently.
