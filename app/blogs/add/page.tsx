@@ -120,7 +120,7 @@ export default function BlogFormPage() {
                   </FormControl>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Select a service</SelectLabel>
+                      <SelectLabel>Select a category</SelectLabel>
                       {CATEGORIES.map((v) => (
                         <SelectItem key={v.name} value={v.name}>
                           {v.name}
