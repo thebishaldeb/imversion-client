@@ -16,12 +16,16 @@ const query = gql`
   }
 `;
 
-const fetchBlogPostById = async (id: number): Promise<BlogPost> => {
-  const { blogPost }: { blogPost: BlogPost } = await client.request(query, {
-    id,
-  });
-
-  return blogPost;
+const fetchBlogPostById = async (id: number): Promise<BlogPost | null> => {
+  try {
+    const { blogPost }: { blogPost: BlogPost } = await client.request(query, {
+      id,
+    });
+    return blogPost;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
 };
 
 export default async function BlogPostPage({
@@ -30,10 +34,14 @@ export default async function BlogPostPage({
   params: { id: string };
 }) {
   const id = parseInt(params.id);
-  const blog: BlogPost = await fetchBlogPostById(id);
+  const blog: BlogPost | null = await fetchBlogPostById(id);
 
   if (!blog) {
-    return <div className="container mx-auto p-6">Blog Post Not Found</div>;
+    return (
+      <div className="container mx-auto p-6 justify-center text-xl text-accent h-[200px] items-center flex bg-form">
+        Blog Not Found
+      </div>
+    );
   }
 
   return (

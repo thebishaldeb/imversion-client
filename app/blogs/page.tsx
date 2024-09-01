@@ -26,16 +26,21 @@ const query = gql`
 const fetchBlogPosts = async (
   limit: number,
   offset: number
-): Promise<Blogs> => {
-  const variables: GetBlogPostsQueryVariables = { limit, offset };
+): Promise<Blogs | null> => {
+  try {
+    const variables: GetBlogPostsQueryVariables = { limit, offset };
 
-  const {
-    blogPosts,
-  }: {
-    blogPosts: Blogs;
-  } = await client.request(query, variables);
+    const {
+      blogPosts,
+    }: {
+      blogPosts: Blogs;
+    } = await client.request(query, variables);
 
-  return blogPosts;
+    return blogPosts;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
 };
 
 interface BlogsPageProps {
@@ -49,7 +54,14 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
   const limit = parseInt(searchParams.limit || "6");
   const offset = parseInt(searchParams.offset || "0");
 
-  const blogs: Blogs = await fetchBlogPosts(limit, offset);
+  const blogs: Blogs | null = await fetchBlogPosts(limit, offset);
+
+  if (!blogs)
+    return (
+      <div className="flex container mx-auto p-6 text-xl text-accent h-[200px]  justify-center items-center bg-form">
+        Something went wrong!
+      </div>
+    );
 
   return <BlogsList blogs={blogs} limit={limit} offset={offset} />;
 }

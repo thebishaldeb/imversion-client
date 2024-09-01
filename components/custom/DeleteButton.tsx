@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { gql, client } from "@/lib/client";
 import { revalidate } from "@/lib/actions";
@@ -12,24 +11,26 @@ const mutation = gql`
 `;
 
 const deleteBlog = async (id: number): Promise<boolean> => {
-  const { deleteBlogPost }: { deleteBlogPost: boolean } = await client.request(
-    mutation,
-    { deleteBlogPostId: id }
-  );
-
-  return deleteBlogPost;
+  try {
+    const { deleteBlogPost }: { deleteBlogPost: boolean } =
+      await client.request(mutation, { deleteBlogPostId: id });
+    return deleteBlogPost;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
 };
 
 const DeleteButton = ({ id }: { id: number }) => {
-  const router = useRouter();
   return (
     <Button
       variant="primary"
       size="sm"
       className="bg-[#ff0000] rounded-none text-primary"
       onClick={async () => {
-        await deleteBlog(id);
-        revalidate(id, true);
+        const res = await deleteBlog(id);
+        if (res) revalidate(id, true);
+        else alert("Could not delete the blog!");
       }}
     >
       Delete

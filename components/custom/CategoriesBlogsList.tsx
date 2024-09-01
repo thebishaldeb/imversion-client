@@ -42,9 +42,13 @@ const CategoriesBlogsList = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       setLoading(true);
-      const { blogPostsByCategory }: { blogPostsByCategory: BlogsList } =
-        await client.request(query, { category, limit, offset });
-      setBlogs(blogPostsByCategory);
+      try {
+        const { blogPostsByCategory }: { blogPostsByCategory: BlogsList } =
+          await client.request(query, { category, limit, offset });
+        setBlogs(blogPostsByCategory);
+      } catch (e) {
+        console.log(e);
+      }
       setLoading(false);
     };
 

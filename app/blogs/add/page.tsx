@@ -64,13 +64,16 @@ const mutation = gql`
 
 const saveBlogPost = async (
   blogPost: CreateBlogPostMutationVariables
-): Promise<BlogPost> => {
-  const { createBlogPost }: { createBlogPost: BlogPost } = await client.request(
-    mutation,
-    blogPost
-  );
+): Promise<BlogPost | null> => {
+  try {
+    const { createBlogPost }: { createBlogPost: BlogPost } =
+      await client.request(mutation, blogPost);
 
-  return createBlogPost;
+    return createBlogPost;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
 };
 
 const FormSchema = z.object({
@@ -92,9 +95,14 @@ export default function BlogFormPage() {
     setLoad(true);
     const blogPost: CreateBlogPostMutationVariables = data;
     const response = await saveBlogPost(blogPost);
+
+    if (!response) {
+      alert("Could not create blog!");
+      setLoad(false);
+      return;
+    }
     revalidate(response.id, true);
     router.push(`/blogs/${response.id}`);
-    setLoad(false);
   };
 
   return (
